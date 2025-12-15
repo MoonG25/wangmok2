@@ -12,6 +12,25 @@ export default function FeedPage() {
 
     useEffect(() => {
         if (!user) return;
+        if (!db) {
+            // Offline/Demo Mode: Set mock posts or empty
+            setPosts([
+                {
+                    id: 'mock-1',
+                    user: '데모 유저',
+                    uid: 'demo',
+                    time: '방금 전',
+                    content: '오프라인 모드입니다. 파이어베이스 설정이 필요합니다.',
+                    likes: 0,
+                    likedBy: [],
+                    images: [],
+                    stats: { volume: '0kg', time: '0m' },
+                    createdAt: { seconds: Date.now() / 1000 }
+                }
+            ]);
+            return;
+        }
+
         const feedsRef = collection(db, 'artifacts', APP_ID, 'public', 'data', 'feeds');
         const q = query(feedsRef, orderBy('createdAt', 'desc'));
 
@@ -27,7 +46,7 @@ export default function FeedPage() {
     }, [user]);
 
     const handleLike = async (post: any) => {
-        if (!user) return;
+        if (!user || !db) return; // Skip if offline
         const postRef = doc(db, 'artifacts', APP_ID, 'public', 'data', 'feeds', post.id);
         const isLiked = post.likedBy && post.likedBy.includes(user.uid);
 

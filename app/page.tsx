@@ -19,6 +19,8 @@ export default function LoginPage() {
   const handleAuth = async (type: string) => {
     setLoading(true);
     try {
+      if (!auth) throw new Error("Firebase Auth not initialized (Missing Keys)");
+
       // For prototype, we stick to Anonymous login but simulate 'Email' flow by updating profile
       // In real app, use createUserWithEmailAndPassword
       await signInAnonymously(auth);

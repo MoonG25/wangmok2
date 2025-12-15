@@ -45,6 +45,15 @@ export const ClientLayout = ({ children }: { children: React.ReactNode }) => {
             return;
         }
 
+        if (!auth) {
+            // Force demo mode logic if auth is missing entirely
+            if (!useStore.getState().isDemoMode) {
+                // If not already in demo mode, maybe we should be?
+                // But let's just do nothing here, the Login Page will handle the user entry.
+            }
+            return;
+        }
+
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             if (!currentUser && pathname !== '/' && pathname !== '/login') {

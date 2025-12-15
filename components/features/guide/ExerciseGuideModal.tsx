@@ -22,26 +22,12 @@ export const ExerciseGuideModal = () => {
 
                 {/* Media Area (Video or GIF Placeholder) */}
                 <div className="aspect-[4/3] bg-neutral-800 flex items-center justify-center relative overflow-hidden group">
-                    {viewingExercise.mp4_url ? (
-                        <video
-                            src={viewingExercise.mp4_url}
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            className="w-full h-full object-cover"
-                        />
-                    ) : (
-                        <div className="relative w-full h-full flex items-center justify-center">
-                            <Dumbbell className="text-yellow-400 w-32 h-32 animate-bounce" strokeWidth={1} />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="w-20 h-2 bg-yellow-400/20 rounded-full mt-24 blur-sm animate-pulse"></div>
-                            </div>
-                            <div className="absolute bottom-3 right-3 bg-black/70 text-yellow-400 text-[10px] px-2 py-1 rounded backdrop-blur-md font-bold border border-yellow-400/20">
-                                GIF
-                            </div>
+                    <div className="relative w-full h-full flex items-center justify-center">
+                        <Dumbbell className="text-yellow-400 w-32 h-32 animate-bounce" strokeWidth={1} />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-20 h-2 bg-yellow-400/20 rounded-full mt-24 blur-sm animate-pulse"></div>
                         </div>
-                    )}
+                    </div>
                 </div>
 
                 <div className="p-6">

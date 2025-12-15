@@ -13,9 +13,22 @@ const firebaseConfig = {
     appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || '1:00000000000:web:00000000000000'
 };
 
-const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+// Check if keys are present
+const isFirebaseIncluded =
+    process.env.NEXT_PUBLIC_FIREBASE_API_KEY &&
+    process.env.NEXT_PUBLIC_FIREBASE_API_KEY !== 'mock-key';
+
+let app: any = null;
+let auth: any = null;
+let db: any = null;
+
+if (isFirebaseIncluded) {
+    app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    db = getFirestore(app);
+} else {
+    console.warn("Firebase keys missing. App running in offline/demo mode.");
+}
 
 export const APP_ID = process.env.NEXT_PUBLIC_APP_ID || 'default-app-id';
 

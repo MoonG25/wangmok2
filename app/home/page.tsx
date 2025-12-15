@@ -19,7 +19,7 @@ export default function HomePage() {
 
     // Fetch stats
     useEffect(() => {
-        if (!user) return;
+        if (!user || !db) return; // Skip if no user or no DB (Demo Mode)
         const statsRef = doc(db, 'artifacts', APP_ID, 'users', user.uid, 'data', 'stats');
         const unsubscribe = onSnapshot(statsRef, (doc) => {
             if (doc.exists()) {

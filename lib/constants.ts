@@ -14,7 +14,6 @@ export interface Exercise {
     slug: string;
     description: string;
     defaultTime: number;
-    mp4_url?: string;
     guide?: string;
     // Routine specific fields
     sets?: number;
@@ -43,8 +42,8 @@ export const DAILY_QUESTS = [
 
 export const EXERCISES: Record<string, Exercise[]> = {
     back: [
-        { id: '1001', name: '데드리프트', slug: 'deadlift', mp4_url: "https://d2m0n84d5tgmh1.cloudfront.net/training-videos/1001.mp4", description: "등/전신 근력 강화", defaultTime: 0 },
-        { id: '1009', name: '시티드 케이블 로우', slug: 'seated-cable-row', mp4_url: "https://d2m0n84d5tgmh1.cloudfront.net/training-videos/1009.mp4", description: "등 중앙부 발달", defaultTime: 0 },
+        { id: '1001', name: '데드리프트', slug: 'deadlift', description: "등/전신 근력 강화", defaultTime: 0 },
+        { id: '1009', name: '시티드 케이블 로우', slug: 'seated-cable-row', description: "등 중앙부 발달", defaultTime: 0 },
         { id: 'b1', name: '바벨 로우', slug: 'barbell-row', description: "등 근육 전체 두께", defaultTime: 0 },
         { id: 'b2', name: '풀 업', slug: 'pull-up', description: "광배근 너비 발달", defaultTime: 0 },
         { id: 'b3', name: '랫 풀다운', slug: 'lat-pulldown', description: "등 너비 운동", defaultTime: 0 },
@@ -60,9 +59,9 @@ export const EXERCISES: Record<string, Exercise[]> = {
         { id: 'b13', name: '랙 풀', slug: 'rack-pull', description: "데드리프트 부분 반복", defaultTime: 0 },
     ],
     chest: [
-        { id: '2001', name: '벤치 프레스', slug: 'bench-press', mp4_url: "https://d2m0n84d5tgmh1.cloudfront.net/training-videos/2001.mp4", description: "가슴 운동의 왕", defaultTime: 0 },
-        { id: '2002', name: '덤벨 벤치 프레스', slug: 'dumbbell-bench-press', mp4_url: "https://d2m0n84d5tgmh1.cloudfront.net/training-videos/2002.mp4", description: "가동범위 극대화", defaultTime: 0 },
-        { id: '2008', name: '딥스', slug: 'dips', mp4_url: "https://d2m0n84d5tgmh1.cloudfront.net/training-videos/2008.mp4", description: "아랫가슴 및 삼두", defaultTime: 0 },
+        { id: '2001', name: '벤치 프레스', slug: 'bench-press', description: "가슴 운동의 왕", defaultTime: 0 },
+        { id: '2002', name: '덤벨 벤치 프레스', slug: 'dumbbell-bench-press', description: "가동범위 극대화", defaultTime: 0 },
+        { id: '2008', name: '딥스', slug: 'dips', description: "아랫가슴 및 삼두", defaultTime: 0 },
         { id: 'c1', name: '인클라인 벤치 프레스', slug: 'incline-bench-press', description: "윗가슴 발달", defaultTime: 0 },
         { id: 'c2', name: '덤벨 플라이', slug: 'dumbbell-fly', description: "가슴 안쪽 라인", defaultTime: 0 },
         { id: 'c3', name: '푸쉬업', slug: 'push-up', description: "기본 맨몸 운동", defaultTime: 0 },
@@ -74,7 +73,7 @@ export const EXERCISES: Record<string, Exercise[]> = {
         { id: 'c9', name: '덤벨 풀오버', slug: 'dumbbell-pullover', description: "가슴과 등 동시 자극", defaultTime: 0 },
     ],
     legs: [
-        { id: '4025', name: '프론트 스쿼트', slug: 'front-squat', mp4_url: "https://d2m0n84d5tgmh1.cloudfront.net/training-videos/4025.mp4", description: "대퇴사두 집중", defaultTime: 0 },
+        { id: '4025', name: '프론트 스쿼트', slug: 'front-squat', description: "대퇴사두 집중", defaultTime: 0 },
         { id: 'l1', name: '바벨 스쿼트', slug: 'barbell-squat', description: "하체 운동의 기본", defaultTime: 0 },
         { id: 'l2', name: '런지', slug: 'lunge', description: "힙업 및 균형", defaultTime: 0 },
         { id: 'l3', name: '레그 프레스', slug: 'leg-press', description: "고중량 하체 운동", defaultTime: 0 },
@@ -90,7 +89,7 @@ export const EXERCISES: Record<string, Exercise[]> = {
         { id: 'l13', name: '박스 점프', slug: 'box-jump', description: "플라이오메트릭", defaultTime: 0 },
     ],
     shoulder: [
-        { id: '3001', name: '오버헤드 프레스', slug: 'overhead-press', mp4_url: "https://d2m0n84d5tgmh1.cloudfront.net/training-videos/3001.mp4", description: "어깨 전체 매스", defaultTime: 0 },
+        { id: '3001', name: '오버헤드 프레스', slug: 'overhead-press', description: "어깨 전체 매스", defaultTime: 0 },
         { id: 's1', name: '덤벨 숄더 프레스', slug: 'dumbbell-shoulder-press', description: "전면/측면 삼각근", defaultTime: 0 },
         { id: 's2', name: '덤벨 레터럴 레이즈', slug: 'dumbbell-lateral-raise', description: "어깨 측면 고립", defaultTime: 0 },
         { id: 's3', name: '덤벨 프론트 레이즈', slug: 'dumbbell-front-raise', description: "전면 삼각근", defaultTime: 0 },
@@ -102,9 +101,9 @@ export const EXERCISES: Record<string, Exercise[]> = {
         { id: 's9', name: '케이블 레터럴 레이즈', slug: 'cable-lateral-raise', description: "지속적인 장력", defaultTime: 0 },
     ],
     arms: [
-        { id: '7001', name: '바벨 바이셉 컬', slug: 'barbell-bicep-curl', mp4_url: "https://d2m0n84d5tgmh1.cloudfront.net/training-videos/7001.mp4", description: "이두근 매스", defaultTime: 0 },
-        { id: '6002', name: '케이블 트라이셉 푸쉬다운', slug: 'cable-tricep-pushdown', mp4_url: "https://d2m0n84d5tgmh1.cloudfront.net/training-videos/6002.mp4", description: "삼두근 외측두", defaultTime: 0 },
-        { id: '8001', name: '덤벨 리스트 컬', slug: 'dumbbell-wrist-curl', mp4_url: "https://d2m0n84d5tgmh1.cloudfront.net/training-videos/8001.mp4", description: "전완근 굴곡근", defaultTime: 0 },
+        { id: '7001', name: '바벨 바이셉 컬', slug: 'barbell-bicep-curl', description: "이두근 매스", defaultTime: 0 },
+        { id: '6002', name: '케이블 트라이셉 푸쉬다운', slug: 'cable-tricep-pushdown', description: "삼두근 외측두", defaultTime: 0 },
+        { id: '8001', name: '덤벨 리스트 컬', slug: 'dumbbell-wrist-curl', description: "전완근 굴곡근", defaultTime: 0 },
         { id: 'a1', name: '덤벨 바이셉 컬', slug: 'dumbbell-bicep-curl', description: "이두근 고립", defaultTime: 0 },
         { id: 'a2', name: '덤벨 해머 컬', slug: 'dumbbell-hammer-curl', description: "상완근 및 이두 바깥쪽", defaultTime: 0 },
         { id: 'a3', name: '라잉 트라이셉 익스텐션', slug: 'lying-barbell-tricep-extension', description: "삼두 장두 발달", defaultTime: 0 },
@@ -115,7 +114,7 @@ export const EXERCISES: Record<string, Exercise[]> = {
         { id: 'a8', name: '리버스 바벨 리스트 컬', slug: 'reverse-barbell-wrist-curl', description: "전완근 신전근", defaultTime: 0 },
     ],
     core: [
-        { id: '5001', name: '레그 레이즈', slug: 'leg-raise', mp4_url: "https://d2m0n84d5tgmh1.cloudfront.net/training-videos/5001.mp4", description: "하복부 강화", defaultTime: 0 },
+        { id: '5001', name: '레그 레이즈', slug: 'leg-raise', description: "하복부 강화", defaultTime: 0 },
         { id: 'co1', name: '플랭크', slug: 'plank', description: "코어 안정성", defaultTime: 60 },
         { id: 'co2', name: '크런치', slug: 'crunch', description: "상복부 고립", defaultTime: 0 },
         { id: 'co3', name: '행잉 레그 레이즈', slug: 'hanging-leg-raise', description: "고강도 하복부", defaultTime: 0 },
