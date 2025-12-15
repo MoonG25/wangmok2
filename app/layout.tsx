@@ -5,7 +5,14 @@ import { ClientLayout } from "@/components/layout/ClientLayout";
 export const metadata: Metadata = {
   title: "FitLife Pro",
   description: "Advanced Fitness Tracking App",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({

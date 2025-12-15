@@ -132,6 +132,15 @@ export default function LoginPage() {
 
         <div className="grid grid-cols-2 gap-3">
           <button
+            onClick={() => handleAuth('email')}
+            disabled={loading}
+            className="col-span-2 bg-yellow-400 hover:bg-yellow-300 text-black font-black py-4 rounded-xl shadow-lg shadow-yellow-400/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+          >
+            <Dumbbell size={20} />
+            <span>테스트 계정으로 바로 시작하기</span>
+          </button>
+
+          <button
             onClick={() => handleAuth('kakao')}
             disabled={loading}
             className="flex items-center justify-center gap-2 bg-[#FEE500] text-black/90 font-bold py-3.5 rounded-xl hover:bg-[#FDD835] transition-colors disabled:opacity-50"

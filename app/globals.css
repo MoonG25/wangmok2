@@ -1,22 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-    --color-neutral-950: #0a0a0a;
+  --color-neutral-950: #0a0a0a;
 }
 
 @utility pt-safe {
   padding-top: env(safe-area-inset-top);
 }
+
 @utility pb-safe {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
 @utility no-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-}
-@utility no-scrollbar::-webkit-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+
+  /* Firefox */
+  &::-webkit-scrollbar {
     display: none;
+  }
 }
 
 :root {

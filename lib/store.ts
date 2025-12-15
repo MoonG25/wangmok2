@@ -27,6 +27,7 @@ interface WorkoutState {
     // Active Workout Status
     workoutStatus: 'idle' | 'ready' | 'running' | 'resting';
     setWorkoutStatus: (status: 'idle' | 'ready' | 'running' | 'resting') => void;
+    startWorkout: () => void;
 
     activeWorkout: ActiveWorkout | null;
     setActiveWorkout: (workout: ActiveWorkout | null) => void;
@@ -77,6 +78,14 @@ export const useStore = create<WorkoutState>()(
 
             workoutStatus: 'idle',
             setWorkoutStatus: (workoutStatus) => set({ workoutStatus }),
+            startWorkout: () => set({
+                workoutStatus: 'ready',
+                activeWorkout: { startTime: Date.now(), logs: [] },
+                currentExerciseIdx: 0,
+                currentSetIdx: 0,
+                timer: 0,
+                isPaused: false
+            }),
 
             activeWorkout: null,
             setActiveWorkout: (activeWorkout) => set({ activeWorkout }),
