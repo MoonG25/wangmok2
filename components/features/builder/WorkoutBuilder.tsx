@@ -162,7 +162,7 @@ export const WorkoutBuilder = () => {
                 </div>
             </div>
 
-            <div className="p-4 border-t border-neutral-800 bg-neutral-900 sticky bottom-0 z-20">
+            <div className="p-4 border-t border-neutral-800 bg-neutral-900 z-20">
                 <Button onClick={handleSave} size="lg" variant="primary" className="font-bold w-full">
                     저장하기
                 </Button>

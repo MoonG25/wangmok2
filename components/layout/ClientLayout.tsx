@@ -13,6 +13,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { ExerciseGuideModal } from '@/components/features/guide/ExerciseGuideModal';
 import { signOut } from 'firebase/auth';
+import { QuestSelectionModal } from '@/components/features/home/QuestSelectionModal';
 
 export const ClientLayout = ({ children }: { children: React.ReactNode }) => {
     const {
@@ -32,6 +33,18 @@ export const ClientLayout = ({ children }: { children: React.ReactNode }) => {
 
     // Auth Listener
     useEffect(() => {
+        // If in Demo Mode, do not listen to Firebase Auth (or ignore nulls)
+        if (useStore.getState().isDemoMode) {
+            // If demo mode is active but no user, set mock user? 
+            // Logic: page.tsx sets demo mode AND user. 
+            // Here we just ensure we don't kick them out.
+            if (!user && pathname !== '/' && pathname !== '/login') {
+                // Maybe restore demo user if lost? 
+                // For now, rely on persistence.
+            }
+            return;
+        }
+
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             if (!currentUser && pathname !== '/' && pathname !== '/login') {
@@ -39,7 +52,9 @@ export const ClientLayout = ({ children }: { children: React.ReactNode }) => {
             }
         });
         return () => unsubscribe();
-    }, [setUser, router, pathname]);
+    }, [setUser, router, pathname, user]);
+    // Added user to dependency to re-check if demo mode changes? 
+    // Ideally listen to isDemoMode too but store access inside effect is via hook or direct.
 
     if (!hydrated) return null; // Or a loader
 
@@ -56,18 +71,11 @@ export const ClientLayout = ({ children }: { children: React.ReactNode }) => {
             {isInternalPage && <BottomNav />}
 
             {/* Global Modals */}
-            <Modal isOpen={activeModal === 'builder'} onClose={() => setActiveModal(null)} title="운동 일정 만들기">
+            <Modal isOpen={activeModal === 'builder'} onClose={() => setActiveModal(null)} title="운동 일정 만들기" disableContentScroll={true} fullScreen={true}>
                 <WorkoutBuilder />
             </Modal>
 
-            <Modal isOpen={activeModal === 'feed-create'} onClose={() => { }} showCloseButton={false} className="bg-transparent border-none shadow-none p-0">
-                {/* FeedCreateModal has its own style container, so we unwrap or adjust? 
-                     FeedCreateModal implementation has a container. 
-                     The Modal wrapper adds a container. Double container?
-                     Let's check Modal implementation. It adds bg-neutral-900.
-                     FeedCreateModal also adds bg-neutral-900.
-                     I should adjust FeedCreateModal to NOT have the outer wrapper or pass className to Modal.
-                  */}
+            <Modal isOpen={activeModal === 'feed-create'} onClose={() => { }} showCloseButton={false} fullScreen={true} disableContentScroll={true}>
                 <FeedCreateModal />
             </Modal>
 
@@ -100,6 +108,10 @@ export const ClientLayout = ({ children }: { children: React.ReactNode }) => {
                         }} variant="danger" className="flex-1">로그아웃</Button>
                     </div>
                 </div>
+            </Modal>
+
+            <Modal isOpen={activeModal === 'quest-selection'} onClose={() => setActiveModal(null)} title="오늘의 퀘스트 선택" showCloseButton={true} fullScreen={true} disableContentScroll={true}>
+                <QuestSelectionModal />
             </Modal>
 
             <ExerciseGuideModal />

@@ -7,6 +7,7 @@ import { signInAnonymously, updateProfile } from "firebase/auth";
 import { auth, db, APP_ID } from "@/lib/firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { useRouter } from 'next/navigation';
+import { useStore } from '@/lib/store';
 
 export default function LoginPage() {
   const [isSignup, setIsSignup] = useState(false);
@@ -64,6 +65,29 @@ export default function LoginPage() {
 
     } catch (error) {
       console.error("Auth error:", error);
+
+      // Fallback to Demo Mode
+      alert("Firebase 인증에 실패했습니다. 테스트 모드로 진입합니다.");
+      useStore.getState().setDemoMode(true);
+      useStore.getState().setUser({
+        uid: 'demo-user',
+        displayName: 'Test User',
+        email: 'test@example.com',
+        emailVerified: true,
+        isAnonymous: true,
+        providerData: [],
+        metadata: {},
+        refreshToken: '',
+        tenantId: null,
+        delete: async () => { },
+        getIdToken: async () => '',
+        getIdTokenResult: async () => ({} as any),
+        reload: async () => { },
+        toJSON: () => ({})
+      } as any);
+
+      router.push('/home');
+
     } finally {
       setLoading(false);
     }

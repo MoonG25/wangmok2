@@ -62,7 +62,7 @@ export const FeedCreateModal = () => {
     };
 
     return (
-        <div className="bg-neutral-900 w-full max-w-md rounded-t-2xl sm:rounded-2xl overflow-hidden p-5 border border-neutral-800">
+        <div className="w-full h-full flex flex-col p-5 bg-neutral-900">
             <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-bold text-white">운동 완료! 🎉</h2>
                 <button onClick={handleSkip}><X className="text-white" /></button>

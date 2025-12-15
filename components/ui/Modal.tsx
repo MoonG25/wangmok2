@@ -10,9 +10,11 @@ interface ModalProps {
     className?: string;
     title?: string;
     showCloseButton?: boolean;
+    disableContentScroll?: boolean;
+    fullScreen?: boolean;
 }
 
-export const Modal = ({ isOpen, onClose, children, className, title, showCloseButton = true }: ModalProps) => {
+export const Modal = ({ isOpen, onClose, children, className, title, showCloseButton = true, disableContentScroll = false, fullScreen = false }: ModalProps) => {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -28,9 +30,15 @@ export const Modal = ({ isOpen, onClose, children, className, title, showCloseBu
     if (!mounted || !isOpen) return null;
 
     return createPortal(
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4 animate-in fade-in duration-200">
+        <div className={cn(
+            "fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-end sm:items-center justify-center animate-in fade-in duration-200",
+            fullScreen ? "p-0" : "p-0 sm:p-4"
+        )}>
             <div className={cn(
-                "bg-neutral-900 w-full max-w-md rounded-t-2xl sm:rounded-2xl flex flex-col overflow-hidden border border-neutral-800 max-h-[90vh] sm:max-h-[800px] animate-in slide-in-from-bottom duration-300",
+                "bg-neutral-900 w-full flex flex-col overflow-hidden border-t sm:border border-neutral-800 animate-in slide-in-from-bottom duration-300",
+                fullScreen
+                    ? "h-[100dvh] max-w-md mx-auto sm:h-[800px] sm:rounded-2xl"
+                    : "max-w-md rounded-t-2xl sm:rounded-2xl max-h-[90vh] sm:max-h-[800px]",
                 className
             )}>
                 {(title || showCloseButton) && (
@@ -43,7 +51,7 @@ export const Modal = ({ isOpen, onClose, children, className, title, showCloseBu
                         )}
                     </div>
                 )}
-                <div className="flex-1 overflow-y-auto">
+                <div className={cn("flex-1", disableContentScroll ? "overflow-hidden" : "overflow-y-auto")}>
                     {children}
                 </div>
             </div>

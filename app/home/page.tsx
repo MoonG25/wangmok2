@@ -11,11 +11,10 @@ import { db, APP_ID } from '@/lib/firebase';
 import { DAILY_QUESTS } from '@/lib/constants';
 
 export default function HomePage() {
-    const { user, setActiveModal } = useStore();
+    const { user, setActiveModal, activeQuest } = useStore();
     const [userStats, setUserStats] = useState<any>({});
 
     // Quest Logic (Simplified local state for demo)
-    const [activeQuest, setActiveQuest] = useState<any>(null); // Ideally from store
     const [isQuestCompleted, setIsQuestCompleted] = useState(false);
 
     // Fetch stats
@@ -39,14 +38,7 @@ export default function HomePage() {
                 activeQuest={activeQuest}
                 isQuestCompleted={isQuestCompleted}
                 onToggleComplete={() => setIsQuestCompleted(!isQuestCompleted)}
-                onOpenSelection={() => {
-                    // For demo, just picking first quest or opening a modal?
-                    // Currently I implemented quest-selection modal logic in ClientLayout if added.
-                    // But I haven't implemented 'QuestSelectionModal' component or added it to ClientLayout yet.
-                    // Fallback: Pick random quest.
-                    const q = DAILY_QUESTS[0];
-                    setActiveQuest(q);
-                }}
+                onOpenSelection={() => setActiveModal('quest-selection')}
             />
 
             <section className="grid grid-cols-2 gap-4">

@@ -11,8 +11,8 @@ export const ExerciseGuideModal = () => {
     if (!viewingExercise) return null;
 
     return (
-        <Modal isOpen={!!viewingExercise} onClose={() => setViewingExercise(null)} className="max-w-sm" showCloseButton={false}>
-            <div className="relative">
+        <Modal isOpen={!!viewingExercise} onClose={() => setViewingExercise(null)} showCloseButton={false} fullScreen={true} disableContentScroll={true}>
+            <div className="relative flex flex-col h-full bg-neutral-900 overflow-y-auto">
                 <button
                     onClick={() => setViewingExercise(null)}
                     className="absolute top-4 right-4 p-2 bg-black/40 hover:bg-black/60 rounded-full text-white backdrop-blur-md z-10 transition-colors"

@@ -19,6 +19,8 @@ interface WorkoutState {
     // Auth
     user: User | null;
     setUser: (user: User | null) => void;
+    isDemoMode: boolean;
+    setDemoMode: (isDemo: boolean) => void;
 
     // Routine
     routine: Exercise[];
@@ -56,6 +58,10 @@ interface WorkoutState {
     currentReps: string;
     setCurrentReps: (reps: string) => void;
 
+    // Daily Quest
+    activeQuest: any | null; // using any for simplicity to match constants, or define Quest type
+    setActiveQuest: (quest: any | null) => void;
+
     // UI State
     activeModal: 'builder' | 'feed-create' | 'logout-confirm' | 'quit-confirm' | 'quest-selection' | null;
     setActiveModal: (modal: 'builder' | 'feed-create' | 'logout-confirm' | 'quit-confirm' | 'quest-selection' | null) => void;
@@ -72,6 +78,8 @@ export const useStore = create<WorkoutState>()(
         (set) => ({
             user: null,
             setUser: (user) => set({ user }),
+            isDemoMode: false,
+            setDemoMode: (isDemoMode) => set({ isDemoMode }),
 
             routine: [],
             setRoutine: (routine) => set({ routine }),
@@ -113,6 +121,9 @@ export const useStore = create<WorkoutState>()(
             currentReps: '',
             setCurrentReps: (currentReps) => set({ currentReps }),
 
+            activeQuest: null,
+            setActiveQuest: (activeQuest) => set({ activeQuest }),
+
             activeModal: null,
             setActiveModal: (activeModal) => set({ activeModal }),
 
@@ -142,7 +153,8 @@ export const useStore = create<WorkoutState>()(
                 timer: state.timer,
                 totalTime: state.totalTime,
                 currentWeight: state.currentWeight,
-                currentReps: state.currentReps
+                currentReps: state.currentReps,
+                activeQuest: state.activeQuest
             }),
         }
     )
